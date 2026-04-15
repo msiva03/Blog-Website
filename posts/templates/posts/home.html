@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<h1 class="text-center my-4">Latest</h1>
+
+<div class="container mt-4">
+    <div class="row">
+
+        {% for post in posts %}
+        <div class="col-md-6 mb-4">
+
+            <div class="card h-100">
+                <img src="..." class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.name }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                    <a href="{% url 'post' post.id %}" class="btn btn-dark">Read More</a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+        {% comment %} {% if posts %} {% endcomment %}
+        <h2>{{username|capfirst|truncatechars:3}}</h2> --> it will change the first letter to caps
+        {% comment %} <h2>{{username}}</h2> {% endcomment %}
+            <h2>{{post}}</h2>
+            {% for post in all_posts%}
+            {% comment %} forloop.first == {{forloop.first}}, forloop.last == {{forloop.last}}
+                {% if forloop.counter == 1%}
+                    <h2>First Loop</h2>
+                {% endif%} {% endcomment %}
+            {% comment %} <h2>{{post.id}}</h2> {% endcomment %}
+                <a href={% url "post" post.id %}><h2>{{forloop.counter0}} - {{post.post_title|title}}</h2></a>
+                <h2>{{post.post_content|truncatewords:5}}</h2>
+            {% empty %}
+                <h2>No Posts are available</h2>
+            {% endfor %}
+        {% comment %} {% elif posts|length == 0 %}
+            <h2>No Posts are available</h2>
+        {% else %}
+            <h2>No posts found</h2>   
+        {% endif %}         {% endcomment %}
+        {% comment %} {% for post in posts %}
+        <h2>POST TITLE</h2>
+        {% endfor %} {% endcomment %}
